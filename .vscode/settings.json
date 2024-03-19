@@ -1,7 +1,10 @@
 {
   "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" }
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ]
 }
