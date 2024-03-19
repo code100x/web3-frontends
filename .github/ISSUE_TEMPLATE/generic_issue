@@ -1,0 +1,78 @@
+name: "Generic Issue"
+description: Create a generic issue for code100x/ui
+title: '[issue]: '
+labels: ['area: general']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thanks for taking the time to create an issue! Please make sure to check the documentation and search open/closed issues before submitting to avoid duplication.
+
+  - type: markdown
+    attributes:
+      value: |
+        #### Not sure if you are facing a bug or need to open a feature request? Feel free to start a discussion:
+        - [Discussions](https://github.com/code100x/ui/discussions/new?category=general)
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: Please select the type of issue you are reporting.
+      options:
+        - Bug Report
+        - Feature Request
+        - Documentation
+        - Enhancement
+        - Question
+      required: true
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: Please provide a detailed description of the issue.
+      placeholder: 'Describe the issue in detail...'
+      value: ''
+    validations:
+      required: true
+
+  - type: input
+    id: affected-components
+    attributes:
+      label: Affected Components
+      description: Are specific components of the project affected by this issue? List them here.
+      placeholder: ex. Layout, Theme Switcher...
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: Provide steps to reproduce the issue if applicable.
+      placeholder: '1. Navigate to...\n2. Click on...\n3. Observe...'
+      value: ''
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context or screenshots about the issue here.
+      placeholder: 'Any additional details, links, or screenshots...'
+      value: ''
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      description: Please acknowledge the following before submitting the issue.
+      options:
+        - label: I have reviewed the documentation
+          required: true
+        - label: I have searched for existing issues and PRs
+          required: true
