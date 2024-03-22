@@ -12,8 +12,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { buttonVariants } from "@/registry/new-york/ui/button"
-import MailPage from "@/app/examples/mail/page"
+import { buttonVariants } from "@/registry/default/ui/button"
 
 export default function IndexPage() {
   return (
@@ -56,11 +55,6 @@ export default function IndexPage() {
           alt="Mail"
           className="block dark:hidden"
         />
-      </section>
-      <section className="hidden md:block">
-        <div className="overflow-hidden rounded-lg border bg-background shadow-lg">
-          <MailPage />
-        </div>
       </section>
     </div>
   )

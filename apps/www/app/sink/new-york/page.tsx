@@ -2,6 +2,7 @@ import * as React from "react"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
+import { Button } from "@/registry/default/ui/button"
 import AccordionDemo from "@/registry/new-york/example/accordion-demo"
 import AlertDialogDemo from "@/registry/new-york/example/alert-dialog-demo"
 import AspectRatioDemo from "@/registry/new-york/example/aspect-ratio-demo"
@@ -46,7 +47,6 @@ import ToggleDisabled from "@/registry/new-york/example/toggle-disabled"
 import ToggleOutline from "@/registry/new-york/example/toggle-outline"
 import ToggleWithText from "@/registry/new-york/example/toggle-with-text"
 import TooltipDemo from "@/registry/new-york/example/tooltip-demo"
-import { Button } from "@/registry/new-york/ui/button"
 
 export default function KitchenSinkPage() {
   return (

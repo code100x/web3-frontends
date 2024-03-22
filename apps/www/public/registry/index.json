@@ -1,5 +1,12 @@
 [
   {
+    "name": "nft-card",
+    "files": [
+      "ui/nft-card.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
     "name": "accordion",
     "dependencies": [
       "@radix-ui/react-accordion"

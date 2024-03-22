@@ -2,6 +2,11 @@ import { Registry } from "@/registry/schema"
 
 const ui: Registry = [
   {
+    name: "nft-card",
+    type: "components:ui",
+    files: ["ui/nft-card.tsx"],
+  },
+  {
     name: "accordion",
     type: "components:ui",
     dependencies: ["@radix-ui/react-accordion"],
@@ -279,6 +284,12 @@ const ui: Registry = [
 ]
 
 const example: Registry = [
+  {
+    name: "nft-card-demo",
+    type: "components:example",
+    registryDependencies: [""],
+    files: ["example/nft-card-demo.tsx"],
+  },
   {
     name: "accordion-demo",
     type: "components:example",
