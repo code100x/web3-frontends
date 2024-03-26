@@ -42,7 +42,7 @@ const NftCard = async ({
   mintAddress,
   ...props
 }: NftCardProps) => {
-  const umi = createUmi(process.env.QUICKNODE!).use(mplTokenMetadata())
+  const umi = createUmi(process.env.NEXT_PUBLIC_QUICKNODE!).use(mplTokenMetadata())
 
   const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
   console.log(nftData)
