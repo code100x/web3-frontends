@@ -59,21 +59,21 @@ const NftCard = async ({
   console.log(nftData)
   return (
     <div className={cn(nftCardVariants({ variant }), className)} {...props}>
-      {/* {nftData ? (
+      {nftData ? (
         <>
           <img
             src={nftData.image}
             alt={nftData.name}
             className="rounded-t-lg"
           />
-          <div className="p-4">
-            <h3 className="text-lg font-bold">{nftData.name}</h3>
+          <div className="px-4 py-2">
+            <h3 className="text-lg font-bold">{nftData.metadata.name}</h3>
             <p>{nftData.description}</p>
           </div>
         </>
       ) : (
         <p>Loading...</p>
-      )} */}
+      )}
     </div>
   )
 }
