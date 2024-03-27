@@ -11,19 +11,57 @@ import { cn } from "@/lib/utils"
 
 //  variants for the NFT card
 const nftCardVariants = cva(
-  "inline-flex flex-col rounded-lg border p-4 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
+  "inline-flex flex-col rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 overflow-hidden",
   {
     variants: {
       variant: {
-        default: "border-gray-200 bg-white text-black hover:bg-gray-50",
-        dark: "border-gray-700 bg-gray-800 text-white hover:bg-gray-700",
+        default: "border-gray-200 bg-white text-black",
+        dark: "border-gray-700 bg-gray-800 text-white",
+      },
+      size: {
+        default: "w-40",
+        xs: "w-20",
+        sm: "w-28",
+        lg: "w-60",
+        xl: "w-80",
       },
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   }
 )
+
+const imgCardVariants = cva("rounded-t-lg select-none", {
+  variants: {
+    imgRatio: {
+      default: "aspect-auto",
+      square: "aspect-square w-full h-full object-cover",
+      video: "aspect-video w-full h-full object-cover",
+    },
+  },
+  defaultVariants: {
+    imgRatio: "default",
+  },
+})
+
+const hideTextVariants = cva("truncate", {
+  variants: {
+    nftName: {
+      default: "block px-4",
+      hidden: "hidden",
+    },
+    collectionName: {
+      default: "block px-4",
+      hidden: "hidden",
+    },
+  },
+  defaultVariants: {
+    nftName: "default",
+    collectionName: "default",
+  },
+})
 
 interface NftCardProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -31,15 +69,13 @@ interface NftCardProps
   mintAddress: string
 }
 
-interface NftData {
-  image: string
-  name: string
-  description: string
-}
-
-const NftCard = async ({
+const NftCard = ({
   className,
   variant,
+  size,
+  imgRatio,
+  nftName,
+  collectionName,
   mintAddress,
   ...props
 }: NftCardProps) => {
@@ -72,17 +108,26 @@ const NftCard = async ({
 
   console.log(nftData)
   return (
-    <div className={cn(nftCardVariants({ variant }), className)} {...props}>
+    <div
+      className={cn(nftCardVariants({ variant, size }), className)}
+      {...props}
+    >
       {nftData ? (
         <>
           <img
-            src={nftData.image}
-            alt={nftData.name}
-            className="rounded-t-lg"
+            src={nftData.uriData.image}
+            alt={nftData.uriData.name}
+            className={cn(imgCardVariants({ imgRatio }))}
           />
-          <div className="px-4 py-2">
-            <h3 className="text-lg font-bold">{nftData.metadata.name}</h3>
-            <p>{nftData.description}</p>
+          <div className="">
+            <p className={cn(hideTextVariants({ collectionName }), "text-sm")}>
+              {nftData.uriData.properties.collection.name}
+            </p>
+            <h3
+              className={cn(hideTextVariants({ nftName }), "text-lg font-bold")}
+            >
+              {nftData.uriData.name}
+            </h3>
           </div>
         </>
       ) : (
@@ -92,4 +137,4 @@ const NftCard = async ({
   )
 }
 NftCard.displayName = "NftCard"
-export { NftCard, nftCardVariants }
+export { NftCard, nftCardVariants, imgCardVariants, hideTextVariants }
