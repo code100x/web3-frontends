@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import {
   fetchDigitalAsset,
   mplTokenMetadata,
@@ -42,9 +43,19 @@ const NftCard = async ({
   mintAddress,
   ...props
 }: NftCardProps) => {
-  const umi = createUmi(process.env.NEXT_PUBLIC_QUICKNODE!).use(mplTokenMetadata())
+  const [nftData, setNftData] = useState<any>(null)
+  const umi = createUmi(process.env.NEXT_PUBLIC_QUICKNODE!).use(
+    mplTokenMetadata()
+  )
 
-  const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
+  useEffect(() => {
+    const fetchNftData = async () => {
+      const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
+      setNftData(nftData)
+    }
+    fetchNftData()
+  }, [])
+
   console.log(nftData)
   return (
     <div className={cn(nftCardVariants({ variant }), className)} {...props}>
