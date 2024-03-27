@@ -44,6 +44,7 @@ const NftCard = async ({
   ...props
 }: NftCardProps) => {
   const [nftData, setNftData] = useState<any>(null)
+
   const umi = createUmi(process.env.NEXT_PUBLIC_QUICKNODE!).use(
     mplTokenMetadata()
   )
@@ -51,7 +52,20 @@ const NftCard = async ({
   useEffect(() => {
     const fetchNftData = async () => {
       const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
-      setNftData(nftData)
+      const uriData = await fetch(
+        "https://madlads.s3.us-west-2.amazonaws.com/json/1976.json",
+        {
+          method: "GET",
+          headers: {
+            Accept: "*/*",
+          },
+        }
+      )
+      const jsonUriData = await uriData.json()
+      setNftData({
+        nft: nftData,
+        uriData: jsonUriData,
+      })
     }
     fetchNftData()
   }, [])
