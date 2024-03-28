@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -15,6 +16,7 @@ import {
 import { buttonVariants } from "@/registry/default/ui/button"
 
 export default function IndexPage() {
+  redirect("/docs")
   return (
     <div className="container relative">
       <PageHeader>
