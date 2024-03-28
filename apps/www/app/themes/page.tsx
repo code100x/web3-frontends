@@ -25,7 +25,7 @@ export default function ThemesPage() {
         className="relative flex flex-col items-start md:flex-row md:items-center"
       >
         <PageHeader>
-          <Announcement />
+          {/* <Announcement /> */}
           <PageHeaderHeading className="hidden md:block">
             Add colors. Make it yours.
           </PageHeaderHeading>

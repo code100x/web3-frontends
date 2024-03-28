@@ -244,7 +244,7 @@ function Customizer() {
             >
               Default
             </Button>
-            <Button
+            {/* <Button
               variant={"outline"}
               size="sm"
               onClick={() => setConfig({ ...config, style: "new-york" })}
@@ -253,7 +253,7 @@ function Customizer() {
               )}
             >
               New York
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="space-y-1.5">

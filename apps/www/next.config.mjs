@@ -20,12 +20,12 @@ const nextConfig = {
     return [
       {
         source: "/components",
-        destination: "/docs/components/accordion",
+        destination: "/docs/components/nft-card",
         permanent: true,
       },
       {
         source: "/docs/components",
-        destination: "/docs/components/accordion",
+        destination: "/docs/components/nft-card",
         permanent: true,
       },
       {

@@ -45,7 +45,7 @@ const NftCard = async ({
 }: NftCardProps) => {
   const [nftData, setNftData] = useState<any>(null)
 
-  const umi = createUmi(process.env.NEXT_PUBLIC_QUICKNODE!).use(
+  const umi = createUmi(process.env.NEXT_PUBLIC_RPCNODE!).use(
     mplTokenMetadata()
   )
 
