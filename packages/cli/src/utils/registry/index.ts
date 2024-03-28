@@ -11,7 +11,7 @@ import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 import { z } from "zod"
 
-const baseUrl = process.env.COMPONENTS_REGISTRY_URL ?? "https://ui.code100x.com"
+const baseUrl = process.env.COMPONENTS_REGISTRY_URL ?? "http://localhost:3001"
 const agent = process.env.https_proxy
   ? new HttpsProxyAgent(process.env.https_proxy)
   : undefined

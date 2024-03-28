@@ -52,15 +52,12 @@ const NftCard = async ({
   useEffect(() => {
     const fetchNftData = async () => {
       const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
-      const uriData = await fetch(
-        "https://madlads.s3.us-west-2.amazonaws.com/json/1976.json",
-        {
-          method: "GET",
-          headers: {
-            Accept: "*/*",
-          },
-        }
-      )
+      const uriData = await fetch(nftData.metadata.uri, {
+        method: "GET",
+        headers: {
+          Accept: "*/*",
+        },
+      })
       const jsonUriData = await uriData.json()
       setNftData({
         nft: nftData,
