@@ -11,19 +11,19 @@ import { cn } from "@/lib/utils"
 
 //  variants for the NFT card
 const nftCardVariants = cva(
-  "inline-flex flex-col rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 overflow-hidden",
+  "inline-flex flex-col border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 overflow-hidden",
   {
     variants: {
       variant: {
         default: "border-gray-200 bg-white text-black",
-        dark: "border-gray-700 bg-gray-800 text-white",
+        dark: "border-gray-700 bg-gray-900 text-grey-100",
       },
       size: {
-        default: "w-40",
-        xs: "w-20",
-        sm: "w-28",
-        lg: "w-60",
-        xl: "w-80",
+        default: "w-full",
+        xs: "w-24 rounded-lg",
+        sm: "w-40 rounded-lg",
+        lg: "w-60 rounded-xl",
+        xl: "w-80 rounded-xl",
       },
     },
     defaultVariants: {
@@ -46,14 +46,14 @@ const imgCardVariants = cva("rounded-t-lg select-none", {
   },
 })
 
-const hideTextVariants = cva("truncate", {
+const hideTextVariants = cva("truncate block", {
   variants: {
     nftName: {
-      default: "block px-4",
+      default: "px-4",
       hidden: "hidden",
     },
     collectionName: {
-      default: "block px-4",
+      default: "px-4",
       hidden: "hidden",
     },
   },
@@ -65,6 +65,8 @@ const hideTextVariants = cva("truncate", {
 
 interface NftCardProps
   extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof imgCardVariants>,
+    VariantProps<typeof hideTextVariants>,
     VariantProps<typeof nftCardVariants> {
   mintAddress: string
 }
@@ -81,22 +83,19 @@ const NftCard = ({
 }: NftCardProps) => {
   const [nftData, setNftData] = useState<any>(null)
 
-  const umi = createUmi(process.env.NEXT_PUBLIC_QUICKNODE!).use(
+  const umi = createUmi(process.env.NEXT_PUBLIC_RPCNODE!).use(
     mplTokenMetadata()
   )
 
   useEffect(() => {
     const fetchNftData = async () => {
       const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
-      const uriData = await fetch(
-        "https://madlads.s3.us-west-2.amazonaws.com/json/1976.json",
-        {
-          method: "GET",
-          headers: {
-            Accept: "*/*",
-          },
-        }
-      )
+      const uriData = await fetch(nftData.metadata.uri, {
+        method: "GET",
+        headers: {
+          Accept: "*/*",
+        },
+      })
       const jsonUriData = await uriData.json()
       setNftData({
         nft: nftData,
@@ -104,9 +103,10 @@ const NftCard = ({
       })
     }
     fetchNftData()
-  }, [])
+  }, [mintAddress])
 
-  console.log(nftData)
+  console.log(hideTextVariants({ nftName }))
+
   return (
     <div
       className={cn(nftCardVariants({ variant, size }), className)}
@@ -117,21 +117,52 @@ const NftCard = ({
           <img
             src={nftData.uriData.image}
             alt={nftData.uriData.name}
-            className={cn(imgCardVariants({ imgRatio }))}
+            className={cn(imgCardVariants({ imgRatio }), "")}
           />
           <div className="">
-            <p className={cn(hideTextVariants({ collectionName }), "text-sm")}>
+            <p
+              className={cn(
+                hideTextVariants({ collectionName }),
+                "text-sm mt-2 mb-1"
+              )}
+            >
               {nftData.uriData.properties.collection.name}
             </p>
             <h3
-              className={cn(hideTextVariants({ nftName }), "text-lg font-bold")}
+              className={cn(
+                hideTextVariants({ nftName }),
+                "text-lg font-bold mt-1 mb-2"
+              )}
             >
               {nftData.uriData.name}
             </h3>
           </div>
         </>
       ) : (
-        <p>Loading...</p>
+        <div
+          className={cn(nftCardVariants({ variant, size }), "animate-pulse")}
+        >
+          <div
+            className={cn(
+              imgCardVariants({ imgRatio }),
+              "w-full bg-gray-300 rounded-t-lg"
+            )}
+          />
+          <div className="">
+            <div
+              className={cn(
+                hideTextVariants({ collectionName }),
+                "mx-4 h-3 bg-gray-300 rounded mt-2 mb-2"
+              )}
+            />
+            <div
+              className={cn(
+                hideTextVariants({ nftName }),
+                "mx-4 w-3/4 h-4 bg-gray-300 rounded mt-2 mb-2"
+              )}
+            />
+          </div>
+        </div>
       )}
     </div>
   )
