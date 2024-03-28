@@ -105,8 +105,6 @@ const NftCard = ({
     fetchNftData()
   }, [mintAddress])
 
-  console.log(hideTextVariants({ nftName }))
-
   return (
     <div
       className={cn(nftCardVariants({ variant, size }), className)}

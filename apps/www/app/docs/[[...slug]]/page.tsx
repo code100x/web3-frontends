@@ -26,8 +26,6 @@ async function getDocFromParams({ params }: DocPageProps) {
   const slug = params.slug?.join("/") || ""
   const doc = allDocs.find((doc) => doc.slugAsParams === slug)
 
-  console.log(doc, slug)
-
   if (!doc) {
     return null
   }

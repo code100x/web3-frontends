@@ -51,7 +51,7 @@ const Collection = ({
   useEffect(() => {
     const fetchNftData = async () => {
       const collectionData = await fetch(
-        `https://cors-anywhere.herokuapp.com/https://moonrank.app/mints/${collectionName.replaceAll(
+        `https://moonrank.app/mints/${collectionName.replaceAll(
           " ",
           "_"
         )}`,

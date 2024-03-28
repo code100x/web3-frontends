@@ -21,6 +21,12 @@ const ui: Registry = [
 
 const example: Registry = [
   {
+    name: "nft-card-demo",
+    type: "components:example",
+    registryDependencies: [""],
+    files: ["example/nft-card-demo.tsx"],
+  },
+  {
     name: "collection-demo",
     type: "components:example",
     registryDependencies: [""],
