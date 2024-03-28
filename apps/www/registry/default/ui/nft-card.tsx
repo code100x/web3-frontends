@@ -11,35 +11,73 @@ import { cn } from "@/lib/utils"
 
 //  variants for the NFT card
 const nftCardVariants = cva(
-  "inline-flex flex-col rounded-lg border p-4 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
+  "inline-flex flex-col border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 overflow-hidden",
   {
     variants: {
       variant: {
-        default: "border-gray-200 bg-white text-black hover:bg-gray-50",
-        dark: "border-gray-700 bg-gray-800 text-white hover:bg-gray-700",
+        default: "border-gray-200 bg-white text-black",
+        dark: "border-gray-700 bg-gray-900 text-grey-100",
+      },
+      size: {
+        default: "w-full",
+        xs: "w-24 rounded-lg",
+        sm: "w-40 rounded-lg",
+        lg: "w-60 rounded-xl",
+        xl: "w-80 rounded-xl",
       },
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   }
 )
 
+const imgCardVariants = cva("rounded-t-lg select-none", {
+  variants: {
+    imgRatio: {
+      default: "aspect-auto",
+      square: "aspect-square w-full h-full object-cover",
+      video: "aspect-video w-full h-full object-cover",
+    },
+  },
+  defaultVariants: {
+    imgRatio: "default",
+  },
+})
+
+const hideTextVariants = cva("truncate block", {
+  variants: {
+    nftName: {
+      default: "px-4",
+      hidden: "hidden",
+    },
+    collectionName: {
+      default: "px-4",
+      hidden: "hidden",
+    },
+  },
+  defaultVariants: {
+    nftName: "default",
+    collectionName: "default",
+  },
+})
+
 interface NftCardProps
   extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof imgCardVariants>,
+    VariantProps<typeof hideTextVariants>,
     VariantProps<typeof nftCardVariants> {
   mintAddress: string
 }
 
-interface NftData {
-  image: string
-  name: string
-  description: string
-}
-
-const NftCard = async ({
+const NftCard = ({
   className,
   variant,
+  size,
+  imgRatio,
+  nftName,
+  collectionName,
   mintAddress,
   ...props
 }: NftCardProps) => {
@@ -65,28 +103,69 @@ const NftCard = async ({
       })
     }
     fetchNftData()
-  }, [])
+  }, [mintAddress])
 
-  console.log(nftData)
+  console.log(hideTextVariants({ nftName }))
+
   return (
-    <div className={cn(nftCardVariants({ variant }), className)} {...props}>
-      {/* {nftData ? (
+    <div
+      className={cn(nftCardVariants({ variant, size }), className)}
+      {...props}
+    >
+      {nftData ? (
         <>
           <img
-            src={nftData.image}
-            alt={nftData.name}
-            className="rounded-t-lg"
+            src={nftData.uriData.image}
+            alt={nftData.uriData.name}
+            className={cn(imgCardVariants({ imgRatio }), "")}
           />
-          <div className="p-4">
-            <h3 className="text-lg font-bold">{nftData.name}</h3>
-            <p>{nftData.description}</p>
+          <div className="">
+            <p
+              className={cn(
+                hideTextVariants({ collectionName }),
+                "text-sm mt-2 mb-1"
+              )}
+            >
+              {nftData.uriData.properties.collection.name}
+            </p>
+            <h3
+              className={cn(
+                hideTextVariants({ nftName }),
+                "text-lg font-bold mt-1 mb-2"
+              )}
+            >
+              {nftData.uriData.name}
+            </h3>
           </div>
         </>
       ) : (
-        <p>Loading...</p>
-      )} */}
+        <div
+          className={cn(nftCardVariants({ variant, size }), "animate-pulse")}
+        >
+          <div
+            className={cn(
+              imgCardVariants({ imgRatio }),
+              "w-full bg-gray-300 rounded-t-lg"
+            )}
+          />
+          <div className="">
+            <div
+              className={cn(
+                hideTextVariants({ collectionName }),
+                "mx-4 h-3 bg-gray-300 rounded mt-2 mb-2"
+              )}
+            />
+            <div
+              className={cn(
+                hideTextVariants({ nftName }),
+                "mx-4 w-3/4 h-4 bg-gray-300 rounded mt-2 mb-2"
+              )}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 NftCard.displayName = "NftCard"
-export { NftCard, nftCardVariants }
+export { NftCard, nftCardVariants, imgCardVariants, hideTextVariants }
