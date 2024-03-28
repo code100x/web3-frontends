@@ -1,17 +1,14 @@
 // @ts-nocheck
-import fs from "fs";
-import path, { basename } from "path";
-import template from "lodash.template";
-import { rimraf } from "rimraf";
+import fs from "fs"
+import path, { basename } from "path"
+import template from "lodash.template"
+import { rimraf } from "rimraf"
 
-
-
-import { colorMapping, colors } from "../registry/colors";
-import { registry } from "../registry/registry";
-import { registrySchema } from "../registry/schema";
-import { styles } from "../registry/styles";
-import { themes } from "../registry/themes";
-
+import { colorMapping, colors } from "../registry/colors"
+import { registry } from "../registry/registry"
+import { registrySchema } from "../registry/schema"
+import { styles } from "../registry/styles"
+import { themes } from "../registry/themes"
 
 const REGISTRY_PATH = path.join(process.cwd(), "public/registry")
 

@@ -10,5 +10,13 @@
       "ui/nft-card.tsx"
     ],
     "type": "components:ui"
+  },
+  {
+    "name": "collection",
+    "dependencies": [],
+    "files": [
+      "ui/collection.tsx"
+    ],
+    "type": "components:ui"
   }
 ]

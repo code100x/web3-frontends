@@ -1,4 +1,8 @@
-import { MainNavItem, SidebarNavItem } from "types/nav"
+import { MainNavItem, SidebarNavItem } from "types/nav";
+
+
+
+
 
 interface DocsConfig {
   mainNav: MainNavItem[]
@@ -95,6 +99,11 @@ export const docsConfig: DocsConfig = {
         {
           title: "NftCard",
           href: "/docs/components/nft-card",
+          items: [],
+        },
+        {
+          title: "Collection",
+          href: "/docs/components/collection",
           items: [],
         },
       ],

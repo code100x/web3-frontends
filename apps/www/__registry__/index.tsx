@@ -12,12 +12,19 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/default/ui/nft-card")),
       files: ["registry/default/ui/nft-card.tsx"],
     },
-    "nft-card-demo": {
-      name: "nft-card-demo",
+    "collection": {
+      name: "collection",
+      type: "components:ui",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/default/ui/collection")),
+      files: ["registry/default/ui/collection.tsx"],
+    },
+    "collection-demo": {
+      name: "collection-demo",
       type: "components:example",
       registryDependencies: [""],
-      component: React.lazy(() => import("@/registry/default/example/nft-card-demo")),
-      files: ["registry/default/example/nft-card-demo.tsx"],
+      component: React.lazy(() => import("@/registry/default/example/collection-demo")),
+      files: ["registry/default/example/collection-demo.tsx"],
     },
   },
 }
