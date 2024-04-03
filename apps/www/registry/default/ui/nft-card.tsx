@@ -1,10 +1,4 @@
 import { useEffect, useState } from "react"
-import {
-  fetchDigitalAsset,
-  mplTokenMetadata,
-} from "@metaplex-foundation/mpl-token-metadata"
-import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
-import { publicKey } from "@metaplex-foundation/umi-public-keys"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -83,25 +77,33 @@ const NftCard = ({
 }: NftCardProps) => {
   const [nftData, setNftData] = useState<any>(null)
 
-  const umi = createUmi(process.env.NEXT_PUBLIC_RPCNODE!).use(
-    mplTokenMetadata()
-  )
-
   useEffect(() => {
     const fetchNftData = async () => {
-      const nftData = await fetchDigitalAsset(umi, publicKey(mintAddress))
-      const uriData = await fetch(nftData.metadata.uri, {
-        method: "GET",
-        headers: {
-          Accept: "*/*",
-        },
-      })
-      const jsonUriData = await uriData.json()
-      setNftData({
-        nft: nftData,
-        uriData: jsonUriData,
-      })
+      const cacheKey = `nftData-${mintAddress}`
+      const cachedData = sessionStorage.getItem(cacheKey)
+
+      if (cachedData) {
+        setNftData(JSON.parse(cachedData))
+      } else {
+        const response = await fetch(
+          `https://solanaapi.nftscan.com/api/sol/assets/${mintAddress}?show_attribute=true`,
+          {
+            method: "GET",
+            headers: {
+              Accept: "*/*",
+              "X-API-KEY": process.env.NEXT_PUBLIC_NFTSCAN_KEY!,
+            },
+          }
+        )
+        const jsonData = await response.json()
+        if (jsonData.code === 200) {
+          const parsedData = JSON.parse(jsonData.data.metadata_json)
+          sessionStorage.setItem(cacheKey, JSON.stringify(parsedData))
+          setNftData(parsedData)
+        }
+      }
     }
+
     fetchNftData()
   }, [mintAddress])
 
@@ -113,18 +115,18 @@ const NftCard = ({
       {nftData ? (
         <>
           <img
-            src={nftData.uriData.image}
-            alt={nftData.uriData.name}
+            src={`https://images.hsingh.site/?url=${nftData.image}&output=webp&width=400&q=80w=418&h=418`}
+            alt={nftData.name}
             className={cn(imgCardVariants({ imgRatio }), "")}
           />
-          <div className="">
+          <div className="border-gray-200 bg-white   dark:border-gray-700 dark:bg-gray-900">
             <p
               className={cn(
                 hideTextVariants({ collectionName }),
                 "text-sm mt-2 mb-1"
               )}
             >
-              {nftData.uriData.properties.collection.name}
+              {nftData.properties.collection.name}
             </p>
             <h3
               className={cn(
@@ -132,7 +134,7 @@ const NftCard = ({
                 "text-lg font-bold mt-1 mb-2"
               )}
             >
-              {nftData.uriData.name}
+              {nftData.name}
             </h3>
           </div>
         </>

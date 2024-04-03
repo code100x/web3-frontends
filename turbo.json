@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "env": [
         "NEXT_PUBLIC_APP_URL",
-        "NEXT_PUBLIC_RPCNODE",
+        "NEXT_PUBLIC_NFTSCAN_KEY",
         "UPSTASH_REDIS_REST_URL",
         "UPSTASH_REDIS_REST_TOKEN",
         "COMPONENTS_REGISTRY_URL",

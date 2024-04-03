@@ -1,6 +1,6 @@
 ---
-title: Nft Card
-description: Displays a badge or a component that looks like a badge.
+title: NFT Card
+description: Displays an NFT card that can showcase NFT metadata, including images, names, and collection details.
 component: true
 ---
 
@@ -14,6 +14,7 @@ component: true
   <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
+
 <TabsContent value="cli">
 
 ```bash
@@ -38,48 +39,36 @@ npx code100x-ui@latest add nft-card
 
 </Tabs>
 
+## Environment Setup
+
+Before using the `NftCard` component, ensure you have the `NEXT_PUBLIC_NFTSCAN_KEY` environment variable set in your project. This key is necessary for fetching NFT data from the NFTScan API.
+
+Create or update your `.env` file in the root of your project with the following line:
+
+```env
+NEXT_PUBLIC_NFTSCAN_KEY=your_nftscan_api_key_here
+```
+
+Replace `your_nftscan_api_key_here` with your actual NFTScan API key. You can obtain this key by registering and creating an API key on the [NFTScan developers portal](https://developer.nftscan.com/).
+
 ## Usage
 
-```tsx
-import { Badge } from "@/components/ui/badge"
-```
+First, import the `NftCard` component:
 
 ```tsx
-<Badge variant="outline">Badge</Badge>
+import { NftCard } from "@/components/ui/nft-card"
 ```
 
-### Link
-
-You can use the `badgeVariants` helper to create a link that looks like a badge.
+Then, use it in your project by passing the required props, like so:
 
 ```tsx
-import { badgeVariants } from "@/components/ui/badge"
+<NftCard
+  mintAddress="YourNFTMintAddress"
+  variant="dark"
+  size="lg"
+  imgRatio="square"
+  nftName="visible"
+  collectionName="visible"
+/>
 ```
 
-```tsx
-<Link className={badgeVariants({ variant: "outline" })}>Badge</Link>
-```
-
-## Examples
-
-### Default
-
-<ComponentPreview name="badge-demo" />
-
----
-
-### Secondary
-
-<ComponentPreview name="badge-secondary" />
-
----
-
-### Outline
-
-<ComponentPreview name="badge-outline" />
-
----
-
-### Destructive
-
-<ComponentPreview name="badge-destructive" />
