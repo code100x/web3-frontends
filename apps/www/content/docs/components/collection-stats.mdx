@@ -4,8 +4,7 @@ description: Displays a dynamic collection of NFT cards, highlighting key metada
 component: true
 ---
 
-<ComponentPreview name="collection-demo" />
-
+<ComponentPreview name="collection-stats-demo" />
 
 ## Installation
 
@@ -19,7 +18,7 @@ component: true
 <TabsContent value="cli">
 
 ```bash
-npx code100x-ui@latest add collection
+npx code100x-ui@latest add collection-stats
 ```
 
 </TabsContent>
@@ -42,7 +41,7 @@ npx code100x-ui@latest add collection
 
 ## Environment Setup
 
-Before using the `Collection` component, ensure you have the `NEXT_PUBLIC_NFTSCAN_KEY` environment variable set in your project. This key is necessary for fetching NFT data from the NFTScan API.
+Before using the `CollectionStats` component, ensure you have the `NEXT_PUBLIC_NFTSCAN_KEY` environment variable set in your project. This key is necessary for fetching NFT data from the NFTScan API.
 
 Create or update your `.env` file in the root of your project with the following line:
 
@@ -54,19 +53,14 @@ Replace `your_nftscan_api_key_here` with your actual NFTScan API key. You can ob
 
 ## Usage
 
-First, import the `Collection` component:
+First, import the `CollectionStats` component:
 
 ```tsx
-import { Collection } from "@/components/ui/collection"
+import { Collection } from "@/components/ui/collection-stats"
 ```
 
 Then, use it in your project by passing the required props, like so:
 
 ```tsx
-<Collection
-  collectionName="UniqueNFTCollectionName"
-  variant="dark"
-  limit={4}
-/>
+<CollectionStats collectionName="Mad Lads" />
 ```
-

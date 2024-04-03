@@ -106,6 +106,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/components/collection",
           items: [],
         },
+        {
+          title: "Collection Stats",
+          href: "/docs/components/collection-stats",
+          items: [],
+        },
       ],
     },
   ],

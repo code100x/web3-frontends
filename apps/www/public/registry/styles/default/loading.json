@@ -1,0 +1,11 @@
+{
+  "name": "loading",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "loading.tsx",
+      "content": "import React from \"react\"\n\nconst Loading = () => {\n  return (\n    <div className=\"flex flex-col items-center justify-center space-y-2\">\n      <div />\n      <span className=\"text-sm font-medium leading-none text-gray-500 dark:text-gray-400\">\n        Loading...\n      </span>\n    </div>\n  )\n}\n\nexport default Loading\n"
+    }
+  ],
+  "type": "components:ui"
+}

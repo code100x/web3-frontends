@@ -1,11 +1,7 @@
 [
   {
     "name": "nft-card",
-    "dependencies": [
-      "@metaplex-foundation/mpl-token-metadata",
-      "@metaplex-foundation/umi-bundle-defaults",
-      "@metaplex-foundation/umi-public-keys"
-    ],
+    "dependencies": [],
     "files": [
       "ui/nft-card.tsx"
     ],
@@ -13,9 +9,50 @@
   },
   {
     "name": "collection",
-    "dependencies": [],
+    "dependencies": [
+      "pagination",
+      "loading"
+    ],
     "files": [
       "ui/collection.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "loading",
+    "dependencies": [],
+    "files": [
+      "ui/loading.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "button",
+    "dependencies": [
+      "@radix-ui/react-slot"
+    ],
+    "files": [
+      "ui/button.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "pagination",
+    "registryDependencies": [
+      "button"
+    ],
+    "files": [
+      "ui/pagination.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "collection-stats",
+    "registryDependencies": [
+      "button"
+    ],
+    "files": [
+      "ui/collection-stats.tsx"
     ],
     "type": "components:ui"
   }

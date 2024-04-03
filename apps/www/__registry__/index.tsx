@@ -19,6 +19,34 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/default/ui/collection")),
       files: ["registry/default/ui/collection.tsx"],
     },
+    "loading": {
+      name: "loading",
+      type: "components:ui",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/default/ui/loading")),
+      files: ["registry/default/ui/loading.tsx"],
+    },
+    "button": {
+      name: "button",
+      type: "components:ui",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/default/ui/button")),
+      files: ["registry/default/ui/button.tsx"],
+    },
+    "pagination": {
+      name: "pagination",
+      type: "components:ui",
+      registryDependencies: ["button"],
+      component: React.lazy(() => import("@/registry/default/ui/pagination")),
+      files: ["registry/default/ui/pagination.tsx"],
+    },
+    "collection-stats": {
+      name: "collection-stats",
+      type: "components:ui",
+      registryDependencies: ["button"],
+      component: React.lazy(() => import("@/registry/default/ui/collection-stats")),
+      files: ["registry/default/ui/collection-stats.tsx"],
+    },
     "nft-card-demo": {
       name: "nft-card-demo",
       type: "components:example",
@@ -32,6 +60,13 @@ export const Index: Record<string, any> = {
       registryDependencies: [""],
       component: React.lazy(() => import("@/registry/default/example/collection-demo")),
       files: ["registry/default/example/collection-demo.tsx"],
+    },
+    "collection-stats-demo": {
+      name: "collection-stats-demo",
+      type: "components:example",
+      registryDependencies: [""],
+      component: React.lazy(() => import("@/registry/default/example/collection-stats-demo")),
+      files: ["registry/default/example/collection-stats-demo.tsx"],
     },
   },
 }

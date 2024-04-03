@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react"
-import {
-  fetchDigitalAsset,
-  mplTokenMetadata,
-} from "@metaplex-foundation/mpl-token-metadata"
-import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
-import { publicKey } from "@metaplex-foundation/umi-public-keys"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+import Loading from "./loading"
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "./pagination"
@@ -51,9 +44,10 @@ const Collection = ({
   const [collection, setCollection] = useState<any>(null)
   const [currentPageKey, setCurrentPageKey] = useState<string>("")
   const [pageKeys, setPageKeys] = useState<string[]>([])
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
-    const cacheKeyPrefix = `collectionData-${collectionName}`
+    setLoading(true)
+    const cacheKeyPrefix = `collectionData-${collectionName}-${limit}`
     const cacheKey = `${cacheKeyPrefix}-${currentPageKey}`
     const fetchCollectionData = async () => {
       const cachedData = sessionStorage.getItem(cacheKey)
@@ -90,6 +84,7 @@ const Collection = ({
           console.error("Error fetching collection data:", error)
         }
       }
+      setLoading(false)
     }
 
     fetchCollectionData()
@@ -121,7 +116,6 @@ const Collection = ({
       setCurrentPageKey(collection.next)
     }
   }
-  console.log(collection)
 
   const CollectionNftCard = (nft: any) => {
     return (
@@ -150,11 +144,15 @@ const Collection = ({
   }
   return (
     <div>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-        {collection?.content?.map((nft: any) => (
-          <CollectionNftCard {...nft} key={nft.token_address} />
-        ))}
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+          {collection?.content?.map((nft: any) => (
+            <CollectionNftCard {...nft} key={nft.token_address} />
+          ))}
+        </div>
+      )}
       <div className="flex justify-center items-center gap-4 text-sm mt-5">
         <Pagination>
           <PaginationContent className="m-0">
@@ -167,10 +165,9 @@ const Collection = ({
             )}
 
             <PaginationItem>
-                <button onClick={handleNextPage}>
-                  <PaginationNext href="#" />
-                </button>
-              
+              <button onClick={handleNextPage}>
+                <PaginationNext href="#" />
+              </button>
             </PaginationItem>
           </PaginationContent>
         </Pagination>
