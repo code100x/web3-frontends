@@ -76,11 +76,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/cli",
           items: [],
         },
-        {
-          title: "Typography",
-          href: "/docs/components/typography",
-          items: [],
-        },
+        // {
+        //   title: "Typography",
+        //   href: "/docs/components/typography",
+        //   items: [],
+        // },
         // {
         //   title: "Figma",
         //   href: "/docs/figma",
