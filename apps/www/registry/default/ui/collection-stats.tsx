@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { useEffect, useState } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
 
-import { Card, CardContent, CardHeader } from "./card"
-import Loading from "./loading"
+
+import { cn } from "@/lib/utils";
+
+
+
+import { Card, CardContent, CardHeader } from "./card";
+import Loading from "./loading";
+
 
 const collectionStatsVariants = cva(
   "inline-flex flex-col rounded-lg border p-4 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
@@ -71,7 +76,7 @@ const CollectionStats = ({
             try {
               sessionStorage.setItem(cachedKey, JSON.stringify(jsonData.data))
             } catch (e) {
-              clearCollectionCache(cacheKeyPrefix)
+              clearCache(cacheKeyPrefix)
               sessionStorage.setItem(cachedKey, JSON.stringify(jsonData.data))
             }
             setCollectionStats(jsonData.data)
@@ -88,7 +93,7 @@ const CollectionStats = ({
     fetchCollectionData()
   }, [collectionName])
 
-  const clearCollectionCache = (prefix: string) => {
+  const clearCache = (prefix: string) => {
     for (let i = 0; i < sessionStorage.length; i++) {
       const key = sessionStorage.key(i)
       if (key && key.startsWith(prefix)) {

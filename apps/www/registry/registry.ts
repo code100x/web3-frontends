@@ -44,8 +44,14 @@ const ui: Registry = [
   {
     name: "collection-stats",
     type: "components:ui",
-    registryDependencies: ["card"],
+    registryDependencies: ["card", "loading"],
     files: ["ui/collection-stats.tsx"],
+  },
+  {
+    name: "nfts-by-account",
+    type: "components:ui",
+    dependencies: ["pagination", "loading"],
+    files: ["ui/nfts-by-account.tsx"],
   },
 ]
 
@@ -67,6 +73,18 @@ const example: Registry = [
     type: "components:example",
     registryDependencies: [""],
     files: ["example/collection-stats-demo.tsx"],
+  },
+  {
+    name: "nfts-by-account-demo",
+    type: "components:example",
+    registryDependencies: [""],
+    files: ["example/nfts-by-account-demo.tsx"],
+  },
+  {
+    name: "nfts-by-account-collection-demo",
+    type: "components:example",
+    registryDependencies: [""],
+    files: ["example/nfts-by-account-collection-demo.tsx"],
   },
 ]
 

@@ -12,7 +12,7 @@ import {
   PaginationPrevious,
 } from "./pagination"
 
-const collectionVariants = cva(
+const nftsByAccountVariants = cva(
   "inline-flex flex-col rounded-lg border p-4 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
   {
     variants: {
@@ -27,37 +27,39 @@ const collectionVariants = cva(
   }
 )
 
-interface CollectionProps
+interface NftsByAccountProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof collectionVariants> {
-  collectionName: string
+    VariantProps<typeof nftsByAccountVariants> {
+  accountAddress: string
+  collectionName?: string
   limit?: number
 }
 
-const Collection = ({
+const NftsByAccount = ({
   className,
   variant,
-  collectionName,
+  accountAddress,
+  collectionName = "",
   limit = 2,
   ...props
-}: CollectionProps) => {
-  const [collection, setCollection] = useState<any>(null)
+}: NftsByAccountProps) => {
+  const [accountNfts, setAccountNfts] = useState<any>(null)
   const [currentPageKey, setCurrentPageKey] = useState<string>("")
   const [pageKeys, setPageKeys] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     setLoading(true)
-    const cacheKeyPrefix = `collectionData-${collectionName}-${limit}`
+    const cacheKeyPrefix = `nftsAccountData-${accountAddress}-${collectionName}-${limit}`
     const cacheKey = `${cacheKeyPrefix}-${currentPageKey}`
-    const fetchCollectionData = async () => {
+    const fetchAccountNftsData = async () => {
       const cachedData = sessionStorage.getItem(cacheKey)
       if (cachedData) {
-        setCollection(JSON.parse(cachedData))
+        setAccountNfts(JSON.parse(cachedData))
       } else {
-        let url = `https://solanaapi.nftscan.com/api/sol/assets/collection/${collectionName}?show_attribute=false&limit=${Math.min(
+        let url = `https://solanaapi.nftscan.com/api/sol/account/own/${accountAddress}?show_attribute=false&limit=${Math.min(
           limit,
           100
-        )}&cursor=${currentPageKey}`
+        )}&cursor=${currentPageKey}&collection=${collectionName}`
         if (currentPageKey) url += `&page=${currentPageKey}`
         try {
           const response = await fetch(url, {
@@ -76,7 +78,7 @@ const Collection = ({
               clearCache(cacheKeyPrefix)
               sessionStorage.setItem(cacheKey, JSON.stringify(jsonData.data))
             }
-            setCollection(jsonData.data)
+            setAccountNfts(jsonData.data)
           } else {
             console.error("Failed to fetch collection data:", jsonData.message)
           }
@@ -87,8 +89,8 @@ const Collection = ({
       setLoading(false)
     }
 
-    fetchCollectionData()
-  }, [collectionName, currentPageKey])
+    fetchAccountNftsData()
+  }, [accountAddress, currentPageKey, collectionName])
 
   const clearCache = (prefix: string) => {
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -110,13 +112,13 @@ const Collection = ({
   }
 
   const handleNextPage = () => {
-    if (collection?.next) {
-      const newPageKeys = [...pageKeys, collection.next]
+    if (accountNfts?.next) {
+      const newPageKeys = [...pageKeys, accountNfts.next]
       setPageKeys(newPageKeys)
-      setCurrentPageKey(collection.next)
+      setCurrentPageKey(accountNfts.next)
     }
   }
-
+  console.log(accountNfts)
   const CollectionNftCard = (nft: any) => {
     return (
       <div className="border border-gray-200 dark:border-gray-800 rounded-lg">
@@ -142,13 +144,14 @@ const Collection = ({
       </div>
     )
   }
+
   return (
     <div>
       {loading ? (
         <Loading />
       ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-          {collection?.content?.map((nft: any) => (
+          {accountNfts?.content?.map((nft: any) => (
             <CollectionNftCard {...nft} key={nft.token_address} />
           ))}
         </div>
@@ -163,8 +166,7 @@ const Collection = ({
                 </button>
               </PaginationItem>
             )}
-
-            {collection?.next && (
+            {accountNfts?.next && (
               <PaginationItem>
                 <button onClick={handleNextPage}>
                   <PaginationNext href="#" />
@@ -177,5 +179,5 @@ const Collection = ({
     </div>
   )
 }
-Collection.displayName = "Collection"
-export { Collection, collectionVariants }
+NftsByAccount.displayName = "NftsByAccount"
+export { NftsByAccount, nftsByAccountVariants }

@@ -111,6 +111,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/components/collection-stats",
           items: [],
         },
+        {
+          title: "Nfts by Account",
+          href: "/docs/components/nfts-by-account",
+          items: [],
+        },
       ],
     },
   ],

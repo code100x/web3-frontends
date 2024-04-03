@@ -47,12 +47,34 @@
     "type": "components:ui"
   },
   {
+    "name": "card",
+    "registryDependencies": [
+      ""
+    ],
+    "files": [
+      "ui/card.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
     "name": "collection-stats",
     "registryDependencies": [
-      "button"
+      "card",
+      "loading"
     ],
     "files": [
       "ui/collection-stats.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "nfts-by-account",
+    "dependencies": [
+      "pagination",
+      "loading"
+    ],
+    "files": [
+      "ui/nfts-by-account.tsx"
     ],
     "type": "components:ui"
   }

@@ -40,12 +40,26 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/default/ui/pagination")),
       files: ["registry/default/ui/pagination.tsx"],
     },
+    "card": {
+      name: "card",
+      type: "components:ui",
+      registryDependencies: [""],
+      component: React.lazy(() => import("@/registry/default/ui/card")),
+      files: ["registry/default/ui/card.tsx"],
+    },
     "collection-stats": {
       name: "collection-stats",
       type: "components:ui",
-      registryDependencies: ["button"],
+      registryDependencies: ["card","loading"],
       component: React.lazy(() => import("@/registry/default/ui/collection-stats")),
       files: ["registry/default/ui/collection-stats.tsx"],
+    },
+    "nfts-by-account": {
+      name: "nfts-by-account",
+      type: "components:ui",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/default/ui/nfts-by-account")),
+      files: ["registry/default/ui/nfts-by-account.tsx"],
     },
     "nft-card-demo": {
       name: "nft-card-demo",
@@ -67,6 +81,20 @@ export const Index: Record<string, any> = {
       registryDependencies: [""],
       component: React.lazy(() => import("@/registry/default/example/collection-stats-demo")),
       files: ["registry/default/example/collection-stats-demo.tsx"],
+    },
+    "nfts-by-account-demo": {
+      name: "nfts-by-account-demo",
+      type: "components:example",
+      registryDependencies: [""],
+      component: React.lazy(() => import("@/registry/default/example/nfts-by-account-demo")),
+      files: ["registry/default/example/nfts-by-account-demo.tsx"],
+    },
+    "nfts-by-account-collection-demo": {
+      name: "nfts-by-account-collection-demo",
+      type: "components:example",
+      registryDependencies: [""],
+      component: React.lazy(() => import("@/registry/default/example/nfts-by-account-collection-demo")),
+      files: ["registry/default/example/nfts-by-account-collection-demo.tsx"],
     },
   },
 }

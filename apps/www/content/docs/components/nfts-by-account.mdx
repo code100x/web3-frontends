@@ -1,0 +1,88 @@
+---
+title: NFTs by Account Showcase
+description: This component dynamically displays NFTs associated with a specific account address, allowing users to view NFT metadata including images, names, and collection details. Designed to fetch and render NFT data directly from the blockchain, it supports pagination for a user-friendly browsing experience.
+component: true
+---
+To align the documentation with your updated component that focuses on displaying NFTs by account with pagination support, here's the revised version that incorporates the additional functionality and nuances of your new implementation:
+
+---
+<ComponentPreview name="nfts-by-account-demo" />
+
+#### Installation
+
+Choose either CLI or manual installation to add the NFTs by Account component to your project, following the steps below based on your preference.
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx code100x-ui@latest add nfts-by-account
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Manually copy and paste the provided code snippet into your project.</Step>
+
+<ComponentSource name="nfts-by-account" />
+
+<Step>Adjust the import paths to ensure they align with your project's structure.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+#### Environment Setup
+
+To utilize the `NftsByAccount` component effectively, you must have the `NEXT_PUBLIC_NFTSCAN_KEY` environment variable configured within your project. This key enables the fetching of NFT data via the NFTScan API.
+
+Ensure your `.env` file at the root of your project contains the following line:
+
+```env
+NEXT_PUBLIC_NFTSCAN_KEY=your_nftscan_api_key_here
+```
+
+Replace `your_nftscan_api_key_here` with the actual API key obtained from the NFTScan developers portal. Visit [NFTScan developers portal](https://developer.nftscan.com/) to register and generate an API key.
+
+#### Usage
+
+Begin by importing the `NftsByAccount` component:
+
+```tsx
+import { NftsByAccount } from "@/components/ui/nfts-by-account"
+```
+
+Then, incorporate it into your project, specifying the necessary props:
+
+```tsx
+<NftsByAccount
+  accountAddress="SolanaAccountAddressHere"
+  collectionName="OptionalCollectionName"
+  limit={4}
+/>
+```
+
+#### Props
+
+- `accountAddress`: The blockchain account address to fetch NFTs for.
+- `collectionName`: (Optional) Specify a collection name to filter NFTs within the account.
+- `limit`: Number of NFTs to display per page. Defaults to 2.
+
+#### Examples
+
+##### NFTs Collection by Account
+
+<ComponentPreview name="nfts-by-account-collection-demo" />
+
+
