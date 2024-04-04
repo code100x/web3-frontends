@@ -116,6 +116,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/components/nfts-by-account",
           items: [],
         },
+        {
+          title: "Trade Ranking",
+          href: "/docs/components/trade-ranking",
+          items: [],
+        },
       ],
     },
   ],

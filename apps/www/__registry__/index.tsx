@@ -61,6 +61,13 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/default/ui/nfts-by-account")),
       files: ["registry/default/ui/nfts-by-account.tsx"],
     },
+    "trade-ranking": {
+      name: "trade-ranking",
+      type: "components:ui",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/default/ui/trade-ranking")),
+      files: ["registry/default/ui/trade-ranking.tsx"],
+    },
     "nft-card-demo": {
       name: "nft-card-demo",
       type: "components:example",
@@ -95,6 +102,13 @@ export const Index: Record<string, any> = {
       registryDependencies: [""],
       component: React.lazy(() => import("@/registry/default/example/nfts-by-account-collection-demo")),
       files: ["registry/default/example/nfts-by-account-collection-demo.tsx"],
+    },
+    "trade-ranking-demo": {
+      name: "trade-ranking-demo",
+      type: "components:example",
+      registryDependencies: [""],
+      component: React.lazy(() => import("@/registry/default/example/trade-ranking-demo")),
+      files: ["registry/default/example/trade-ranking-demo.tsx"],
     },
   },
 }

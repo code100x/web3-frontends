@@ -1,0 +1,75 @@
+---
+title: Trade Ranking Showcase
+description: This component dynamically displays trading rankings for NFT collections, allowing users to view detailed metrics such as collection statistics, trading volumes, and prices. It supports customizable time frames, sorting options, and a responsive design for an optimal browsing experience. Utilizing the NFTScan API, it ensures up-to-date information is presented through an engaging and interactive UI.
+component: true
+---
+
+<ComponentPreview name="trade-ranking-demo" />
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx code100x-ui@latest add trade-ranking
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the provided code snippet and paste it into your project.</Step>
+
+<ComponentSource name="trade-ranking" />
+
+<Step>Ensure the import paths are correctly adjusted to match your project's structure.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+#### Environment Setup
+
+The `TradeRanking` component requires the `NEXT_PUBLIC_NFTSCAN_KEY` environment variable. This key is used to fetch trading data via the NFTScan API.
+
+Add this line to your `.env` file:
+
+```env
+NEXT_PUBLIC_NFTSCAN_KEY=your_nftscan_api_key_here
+```
+
+Replace `your_nftscan_api_key_here` with your actual API key, which you can obtain by registering at the [NFTScan developers portal](https://developer.nftscan.com/).
+
+#### Usage
+
+To use the `TradeRanking` component, first import it into your project:
+
+```tsx
+import { TradeRanking } from "@/components/ui/trade-ranking"
+```
+
+Then, include it in your UI, specifying any desired props for customization:
+
+```tsx
+<TradeRanking
+  time="1d"
+  sortBy="volume"
+  sort_order="desc"
+/>
+```
+
+#### Props
+
+- `time`: Time frame for trading data (`"1d"`, `"15m"`, `"30m"`, `"1h"`, `"6h"`, `"12h"`).
+- `sortBy`: Metric to sort by (`"volume"` or `"sales"`).
+- `sort_order`: Sorting order (`"asc"` or `"desc"`).
+

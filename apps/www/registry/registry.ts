@@ -53,6 +53,12 @@ const ui: Registry = [
     dependencies: ["pagination", "loading"],
     files: ["ui/nfts-by-account.tsx"],
   },
+  {
+    name: "trade-ranking",
+    type: "components:ui",
+    dependencies: ["loading"],
+    files: ["ui/trade-ranking.tsx"],
+  },
 ]
 
 const example: Registry = [
@@ -85,6 +91,12 @@ const example: Registry = [
     type: "components:example",
     registryDependencies: [""],
     files: ["example/nfts-by-account-collection-demo.tsx"],
+  },
+  {
+    name: "trade-ranking-demo",
+    type: "components:example",
+    registryDependencies: [""],
+    files: ["example/trade-ranking-demo.tsx"],
   },
 ]
 

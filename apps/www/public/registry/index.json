@@ -77,5 +77,15 @@
       "ui/nfts-by-account.tsx"
     ],
     "type": "components:ui"
+  },
+  {
+    "name": "trade-ranking",
+    "dependencies": [
+      "loading"
+    ],
+    "files": [
+      "ui/trade-ranking.tsx"
+    ],
+    "type": "components:ui"
   }
 ]
